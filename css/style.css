@@ -216,14 +216,14 @@
   .scroll-indicator {
     position: absolute;
     bottom: 40px;
-    left: 46%;
+    left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
     opacity: 0;
-    animation: fadeInUp 0.8s ease forwards;
+    animation: scrollIn 0.8s ease forwards;
     animation-delay: 1s;
   }
   
@@ -239,7 +239,7 @@
     animation: bounceDown 2s infinite;
   }
   
-  @keyframes fadeInUp {
+  @keyframes scrollIn {
     from {
       opacity: 0;
       transform: translate(-50%, 20px);
