@@ -130,6 +130,15 @@
     width: 100%;
     box-shadow: var(--glow);
   }
+
+  nav li.active a {
+    color: var(--primary);
+  }
+
+  nav li.active::after {
+    width: 100%;
+    box-shadow: var(--glow);
+  }
   
   /* ===== Hero Section ===== */
   #hero {
@@ -151,6 +160,12 @@
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 0;
+  }
+
+  #hero .container {
+    position: relative;
+    z-index: 1;
   }
   
   .hero-content {
@@ -1257,4 +1272,160 @@
     justify-content: center;
     margin: 0 auto 10px;
     width: fit-content;
+  }
+
+  /* ===== Experience Timeline ===== */
+  #experience {
+    min-height: 60vh;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    padding-left: 8px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--primary), var(--accent));
+    opacity: 0.4;
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-left: 80px;
+  }
+
+  .timeline-badge {
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    background: rgba(0, 255, 240, 0.1);
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    box-shadow: 0 0 18px rgba(0, 255, 240, 0.25);
+  }
+
+  .timeline-badge.current {
+    background: var(--primary);
+    color: var(--bg);
+    box-shadow: var(--glow);
+  }
+
+  .timeline-content {
+    background: var(--card-bg);
+    border: 1px solid rgba(0, 255, 240, 0.15);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+
+  .timeline-content h3 {
+    color: var(--fg);
+    margin-bottom: 4px;
+  }
+
+  .timeline-content .company {
+    color: var(--primary);
+  }
+
+  .timeline-period {
+    color: var(--accent);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  .timeline-content p {
+    color: var(--fg);
+    line-height: 1.6;
+  }
+
+  /* ===== Contact ===== */
+  #contact .container {
+    text-align: center;
+  }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    padding: 10px 20px;
+    background: rgba(0, 255, 240, 0.08);
+    border: 2px solid var(--primary);
+    border-radius: 25px;
+    color: var(--primary);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+  }
+
+  .copy-btn:hover {
+    background: var(--primary);
+    color: var(--bg);
+    box-shadow: var(--glow);
+  }
+
+  /* ===== More Projects Toggle ===== */
+  .more-projects-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 24px auto 0;
+    padding: 10px 22px;
+    background: transparent;
+    border: 2px dashed rgba(0, 255, 240, 0.5);
+    border-radius: 20px;
+    color: var(--primary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+
+  .more-projects-toggle:hover {
+    background: rgba(0, 255, 240, 0.08);
+    border-style: solid;
+    box-shadow: var(--glow);
+  }
+
+  .cards.projects.more-projects {
+    display: none;
+  }
+
+  .cards.projects.more-projects.open {
+    display: grid;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-item {
+      padding-left: 70px;
+    }
+    .timeline-badge {
+      width: 48px;
+      height: 48px;
+    }
+    .timeline::before {
+      left: 24px;
+    }
   }

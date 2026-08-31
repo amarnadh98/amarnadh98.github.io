@@ -4,6 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Amarnadh's Portfolio</title>
+  <meta name="description" content="Amarnadh Avuduri — AI/ML Engineer building production-ready Generative AI and agentic (multi-agent) systems. Expertise in LangGraph, LangChain, CrewAI, MCP, RAG and LLM applications." />
+  <meta name="author" content="Amarnadh Avuduri" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://amarnadh98.github.io/" />
+  <meta property="og:title" content="Amarnadh — AI/ML Engineer | Agentic AI & Multi-Agent Systems" />
+  <meta property="og:description" content="Building production-ready Generative AI and agentic solutions. Multi-agent architectures, RAG pipelines, and LLM applications." />
+  <meta property="og:image" content="https://amarnadh98.github.io/images/og-image.png" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Amarnadh — AI/ML Engineer | Agentic AI & Multi-Agent Systems" />
+  <meta name="twitter:description" content="Building production-ready Generative AI and agentic solutions. Multi-agent architectures, RAG pipelines, and LLM applications." />
+  <meta name="twitter:image" content="https://amarnadh98.github.io/images/og-image.png" />
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -16,6 +30,7 @@
       <ul>
         <li><a href="#hero">Home</a></li>
         <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a href="https://www.canva.com/design/DAGk54mpNKs/RrK_T3Qyf9WaP31aSYSSHQ/view?utm_content=DAGk54mpNKs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h72be210687" target="_blank">Resume</a></li>
@@ -25,10 +40,11 @@
 
   <!-- HERO -->
   <section id="hero">
+    <canvas id="bot-canvas"></canvas>
     <div class="container">
         <h1>Hi there, this is Amarnadh.</h1>
         <h1><span class="typing-container"><span class="role-text"></span><span class="cursor">|</span></span></h1>
-        <p>Building intelligent AI solutions that solve real‑world challenges.</p>
+        <p>Building intelligent, production‑ready AI and multi‑agent systems that solve real‑world challenges.</p>
         <div class="hero-buttons">
           <a href="#projects" class="btn">View Projects</a>
           <a href="#contact" class="btn">Get In Touch</a>
@@ -65,13 +81,11 @@
           <div class="response-section">
             <div class="label">Response:</div>
             <div class="response-box" id="about-response">
-                Hello! I'm an AI & ML Engineer with a passion for building intelligent systems.
+                Hello! I'm an AI/ML Engineer with 3+ years of experience building production-ready Generative AI and agentic solutions for enterprise clients.
 
-                I specialize in designing and implementing NLP, Computer Vision, and Deep Learning solutions that push the boundaries of what's possible.
+                I currently build multi-agent systems at 66degrees, and I run a personal project building an end-to-end fraud-detection and risk-intelligence pipeline solo.
 
-                My goal is to create AI systems that are both technically impressive and ethically sound.
-
-                <!-- <span class="highlight">Would you like to know more about my work?</span> -->
+                I specialize in multi-agent architectures, Prompt Engineering, RAG pipelines, and agentic workflows (LangGraph, LangChain, CrewAI, MCP) — turning hard, ambiguous problems into deployable, high-leverage systems.
             </div>
             <div class="social-links">
               <a href="https://www.linkedin.com/in/amarnadh-avuduri/" target="_blank" class="social-icon linkedin">
@@ -122,6 +136,34 @@
     </div>
   </section>
 
+  <!-- EXPERIENCE -->
+  <section id="experience" class="hidden">
+    <div class="container">
+      <div class="command-label" tabindex="0">
+        <i class="fas fa-briefcase"></i> ai.getExperience()
+      </div>
+      <h2 class="section-heading">My <span class="gradient-text">Experience</span></h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-badge current">Now</div>
+          <div class="timeline-content">
+            <h3>AI/ML Engineer <span class="company">· 66degrees</span></h3>
+            <div class="timeline-period">Sep 2025 — Present</div>
+            <p>Building multi-agent systems for a global engineering-services client — the Virtual Engineer platform. Orchestrator–planner–specialist agent architectures, memory and token management for long multi-turn sessions, and reusable MCP tool-development patterns.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-badge">Prior</div>
+          <div class="timeline-content">
+            <h3>AI/ML Engineer <span class="company">· Quantiphi</span></h3>
+            <div class="timeline-period">Jul 2023 — Sep 2025</div>
+            <p>Designed and deployed Generative AI and agentic solutions for enterprise clients — the Healthcare Insights Platform, GTM Intelligence Assistant, and conversational RAG systems.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- PROJECTS -->
   <section id="projects" class="hidden">
     <div class="container">
@@ -144,6 +186,7 @@
           
           <div class="filters">
             <button class="active" data-filter="All">All Projects</button>
+            <button data-filter="agentic">Agentic AI</button>
             <button data-filter="gen-ai">Generative AI</button>
             <button data-filter="nlp">NLP</button>
             <button data-filter="cv">Computer Vision</button>
@@ -154,44 +197,26 @@
           <div class="found-text">Found 6 projects matching filter "all"</div>
           
           <div class="cards projects">
+            <div class="card" data-category="agentic gen-ai">
+              <img src="images/virtual_engineer.svg" alt="Virtual Engineer — Multi-Agent Platform">
+              <div class="card-content">
+                <h3>Virtual Engineer (66degrees)</h3>
+                <a href="#" class="project-link">View Project →</a>
+              </div>
+            </div>
+
+            <div class="card" data-category="agentic ml">
+              <img src="images/fraud_detection.svg" alt="Fraud Detection & Risk Intelligence Platform">
+              <div class="card-content">
+                <h3>Fraud Detection & Risk Intelligence Platform</h3>
+                <a href="#" class="project-link">View Project →</a>
+              </div>
+            </div>
+
             <div class="card" data-category="gen-ai nlp">
               <img src="images/hcls_insights_platform.png" alt="Healthcare Insights Platform">
               <div class="card-content">
                 <h3>Healthcare Insights Platform</h3>
-                <!-- <p>An HCLS end-to-end analytics platform along with natural language-driven insights to support strategic decision-making.</p>
-                <div class="tags">
-                  <span>LLMs</span>
-                  <span>Agents</span>
-                  <span>Prompt Engineering</span>
-                </div> -->
-                <a href="#" class="project-link">View Project →</a>
-              </div>
-            </div>
-
-            <div class="card" data-category="gen-ai nlp">
-              <img src="images/recipe_recommender_chatbot2.png" alt="Recipe Recommender Chatbot">
-              <div class="card-content">
-                <h3>Recipe Recommender Chatbot</h3>
-                <!-- <p>A personalized recipe recommendation chatbot that suggests dishes based on users' cart items to boost engagement and basket value.</p>
-                <div class="tags">
-                  <span>LLMs</span>
-                  <span>RAG</span>
-                  <span>Generative AI</span>
-                </div> -->
-                <a href="#" class="project-link">View Project →</a>
-              </div>
-            </div>
-
-            <div class="card" data-category="dl nlp cv">
-              <img src="images/fer_analysis.png" alt="Emotion-Aware Student Engagement System">
-              <div class="card-content">
-                <h3>Enhancing Student Engagement through Teacher's Emotion Analysis</h3>
-                <!-- <p>A deep learning-based system to enhance student engagement by analyzing teacher emotions and correlating them with student feedback sentiment.</p>
-                <div class="tags">
-                  <span>Stable Diffusion</span>
-                  <span>GANs</span>
-                  <span>CLIP</span>
-                </div> -->
                 <a href="#" class="project-link">View Project →</a>
               </div>
             </div>
@@ -200,17 +225,32 @@
               <img src="images/gtm_accelarator_tool_1.jpeg" alt="GTM Intelligence Assistant">
               <div class="card-content">
                 <h3>GTM Intelligence Assistant</h3>
-                <!-- <p></p>
-                <div class="tags">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div> -->
                 <a href="#" class="project-link">View Project →</a>
               </div>
             </div>
 
+          </div>
 
+          <button id="more-projects-toggle" class="more-projects-toggle">
+            <i class="fas fa-chevron-down"></i> More Projects
+          </button>
+
+          <div class="cards projects more-projects" id="more-projects">
+            <div class="card" data-category="gen-ai nlp">
+              <img src="images/recipe_recommender_chatbot2.png" alt="Recipe Recommender Chatbot">
+              <div class="card-content">
+                <h3>Recipe Recommender Chatbot</h3>
+                <a href="#" class="project-link">View Project →</a>
+              </div>
+            </div>
+
+            <div class="card" data-category="dl nlp cv">
+              <img src="images/fer_analysis.png" alt="Emotion-Aware Student Engagement System">
+              <div class="card-content">
+                <h3>Enhancing Student Engagement through Teacher's Emotion Analysis</h3>
+                <a href="#" class="project-link">View Project →</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -224,6 +264,9 @@
       <p>Feel free to reach out for collaborations or just a friendly chat.</p>
       <p>Email: <a href="mailto:avenkatamarnadh@gmail.com">avenkatamarnadh@gmail.com</a></p>
       <p>Mobile: <a href="tel:+917794920138">+917794920138</a></p>
+      <button id="copy-email" class="copy-btn" data-email="avenkatamarnadh@gmail.com">
+        <i class="fas fa-copy"></i> Copy Email
+      </button>
     </div>
   </section>
 
@@ -257,6 +300,6 @@
 </body>
 
 <footer class="footer-container">
-    <p>&copy; 2025 Amarnadh. All rights reserved.</p>
+    <p>&copy; 2026 Amarnadh. All rights reserved.</p>
 </footer>
 </html>
