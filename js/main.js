@@ -60,7 +60,9 @@ function initSmoothScrolling() {
         anchor.addEventListener('click', e => {
             e.preventDefault();
             const targetId = anchor.getAttribute('href');
-            $(targetId)?.scrollIntoView({ behavior: 'smooth' });
+            if (targetId.length > 1) {
+                $(targetId)?.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     });
 }
@@ -461,7 +463,6 @@ function initProjectModal() {
     // Project data - you can add more details for each project
     const projectData = {
         'Virtual Engineer (66degrees)': {
-            image: 'images/virtual_engineer.svg',
             description: `A multi-agent agentic platform built for a global engineering-services client, automating civil, electrical, and mechanical engineering workflows.`,
             techStack: ['LangGraph', 'LangChain', 'MCP', 'Multi-Agent Systems', 'Prompt Engineering', 'LLMs', 'FastAPI', 'GCP'],
             features: [
@@ -474,7 +475,6 @@ function initProjectModal() {
         },
 
         'Fraud Detection & Risk Intelligence Platform': {
-            image: 'images/fraud_detection.svg',
             description: `A personal project building an end-to-end fraud-detection and risk-intelligence pipeline — an AI agent that analyzes transaction and account activity for suspicious behavior.`,
             techStack: ['LLMs', 'Agents', 'SHAP', 'FalkorDB', 'Cypher', 'GCP', 'FastAPI', 'Python'],
             features: [
@@ -488,7 +488,6 @@ function initProjectModal() {
         },
 
         'Healthcare Insights Platform': {
-            image: 'images/hcls_insights_platform.png',
             description: `An end-to-end Healthcare analytics platform along with natural language-driven insights to support strategic decision-making.`,
             techStack: ['LLMs', 'GCP', 'Agents', 'Prompt Engineering','Snowflake','Milvus', 'LangChain', 'LangGraph', 'DeepEval'],
             features: [
@@ -503,7 +502,6 @@ function initProjectModal() {
         },
 
         'Recipe Recommender Chatbot': {
-            image: 'images/recipe_recommender_chatbot2.png',
             description: `A personalized recipe recommendation chatbot that suggests dishes based on users' cart items to boost engagement and basket value.`,
             techStack: ['LLMs', 'RAG', 'Prompt Engineering','Generative AI', 'Web Scraping', 'Dialogflow CX'],
             features: [
@@ -514,7 +512,6 @@ function initProjectModal() {
             ]
         },
         "Enhancing Student Engagement through Teacher's Emotion Analysis": {
-            image: 'images/fer_analysis.png',
             description: `A deep learning-based system to enhance student engagement by analyzing teacher emotions and correlating them with student feedback sentiment.`,
             techStack: ['CNN', 'VGG16', 'BERT', 'NLP', 'Sentiment Analysis', 'Deep Learning'],
             features: [
@@ -526,7 +523,6 @@ function initProjectModal() {
             ]
         },
         'GTM Intelligence Assistant': {
-            image: 'images/gtm_accelarator_tool_1.jpeg',
             description: `An internal tool to accelerate client research for GTM teams by generating company profiles, use case recommendations, and persona insights using generative AI and vector-based retrieval.`,
             techStack: ['LLMs', 'RAG', 'ChromaDB', 'Web Scraping', 'Streamlit', 'Linkedin Scraping'],
             features: [
@@ -548,13 +544,6 @@ function initProjectModal() {
         $('.modal-header h2').textContent = projectTitle;
         $('.project-description').textContent = project.description;
 
-        // Update modal image
-        const modalImage = $('.modal-image');
-        if (modalImage) {
-            modalImage.src = project.image;
-            modalImage.alt = projectTitle;
-        }
-        
         // Update tech stack
         const modalTags = $('.modal-tags');
         modalTags.innerHTML = project.techStack
