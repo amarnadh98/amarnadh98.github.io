@@ -48,6 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initRoleTextAnimation();
     initScrollToTop();
     initProjectModal();
+    initHeroCanvas();
+    initActiveNav();
+    initCopyEmail();
+    initMoreProjectsToggle();
 });
 
 // Navigation and scrolling
@@ -145,13 +149,11 @@ function updateAboutContent(contentType) {
     switch (contentType) {
         case 'about':
             command = '> Tell me about yourself';
-            content = `Hello! I'm an AI & ML Engineer passionate about building intelligent, real-world solutions.
+            content = `Hello! I'm an AI/ML Engineer with 3+ years of experience building production-ready Generative AI and agentic solutions for enterprise clients.
 
-                       I specialize in designing and deploying Generative AI systems, LLM-powered agents, and Retrieval-Augmented Generation (RAG) workflows.
+                       I currently build multi-agent systems at 66degrees, and I run a personal project building an end-to-end fraud-detection and risk-intelligence pipeline solo.
 
-                       My work focuses on creating scalable, adaptive, and user-centric AI applications that bridge the gap between cutting-edge research and impactful product experiences.
-                        
-                       I am driven by a curiosity for innovation, a commitment to continuous learning, and a strong belief in building AI systems that are not just technically powerful, but also responsible and user-aligned.`;
+                       I specialize in multi-agent architectures, Prompt Engineering, RAG pipelines, and agentic workflows (LangGraph, LangChain, CrewAI, MCP) — turning hard, ambiguous problems into deployable, high-leverage systems.`;
             break;
             
         case 'education':
@@ -183,33 +185,48 @@ function updateAboutContent(contentType) {
             content = `<div class="skills-content">
                 <div class="education-item">
                     <i class="fas fa-brain gradient-text"></i>
-                    <h4>Skills</h4>
+                    <h4>AI & Machine Learning</h4>
                     <div class="tags">
                         <span>Generative AI</span>
-                        <span>Agents</span>
                         <span>Prompt Engineering</span>
-                        <span>LLMOps</span>
-                        <span>Computer Vision</span>
-                        <span>NLP</span>
+                        <span>LLMs</span>
+                        <span>RAG & Agents</span>
                         <span>Machine Learning</span>
                         <span>Deep Learning</span>
+                        <span>Computer Vision</span>
+                        <span>NLP</span>
+                        <span>PyTorch</span>
                     </div>
                 </div>
 
                 <div class="education-item">
-                    <i class="fas fa-code gradient-text"></i>
-                    <h4>Programming & Tools</h4>
+                    <i class="fas fa-robot gradient-text"></i>
+                    <h4>Agentic Systems</h4>
                     <div class="tags">
-                        <span>Python</span>
-                        <span>Google Cloud Platform</span>
-                        <span>MySQL</span>
-                        <span>Langchain</span>
-                        <span>Langgraph</span>
+                        <span>Multi-Agent Systems</span>
+                        <span>Agent Orchestration</span>
+                        <span>LangGraph</span>
+                        <span>LangChain</span>
                         <span>CrewAI</span>
+                        <span>MCP</span>
+                        <span>LLM Observability (Langfuse)</span>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <i class="fas fa-cloud gradient-text"></i>
+                    <h4>Cloud & Engineering</h4>
+                    <div class="tags">
+                        <span>GCP</span>
+                        <span>Vertex AI</span>
+                        <span>BigQuery</span>
+                        <span>Firestore</span>
+                        <span>PostgreSQL</span>
+                        <span>Pub/Sub</span>
                         <span>Docker</span>
-                        <span>Behave & Cypress</span>
-                        <span>FastAPI</span>
+                        <span>CI/CD (GitHub Actions)</span>
                         <span>Streamlit</span>
+                        <span>FastAPI</span>
                     </div>
                 </div>
 
@@ -246,7 +263,7 @@ async function initRoleTextAnimation() {
     const roleText = container?.querySelector('.role-text');
     if (!container || !roleText) return;
 
-    const roles = ['An ML Engineer', 'A Gen AI Developer', 'A Finance Enthusiast'];
+    const roles = ['An Agentic AI Engineer', 'A Fintech Enthusiast'];
     let currentIndex = 0;
 
     while (true) {
@@ -287,6 +304,154 @@ function initScrollToTop() {
     });
 }
 
+// Active nav highlight based on scroll position
+function initActiveNav() {
+    const sections = $$('section[id]');
+    const navLinks = $$('nav a[href^="#"]');
+    if (!sections.length || !navLinks.length) return;
+
+    function onScroll() {
+        const scrollPos = window.scrollY + window.innerHeight / 3;
+        let currentId = sections[0].id;
+        sections.forEach(sec => {
+            if (sec.offsetTop <= scrollPos) currentId = sec.id;
+        });
+        navLinks.forEach(link => {
+            const li = link.closest('li');
+            li.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+        });
+    }
+
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+}
+
+// Copy email to clipboard
+function initCopyEmail() {
+    const btn = $('#copy-email');
+    if (!btn) return;
+    const email = btn.dataset.email;
+
+    btn.addEventListener('click', () => {
+        const done = () => {
+            const original = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => { btn.innerHTML = original; }, 2000);
+        };
+
+        const fallbackCopy = () => {
+            const ta = document.createElement('textarea');
+            ta.value = email;
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); } catch (e) {}
+            document.body.removeChild(ta);
+            done();
+        };
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(done).catch(fallbackCopy);
+        } else {
+            fallbackCopy();
+        }
+    });
+}
+
+// More projects toggle
+function initMoreProjectsToggle() {
+    const toggle = $('#more-projects-toggle');
+    const more = $('#more-projects');
+    if (!toggle || !more) return;
+
+    toggle.addEventListener('click', () => {
+        const open = more.classList.toggle('open');
+        toggle.innerHTML = open
+            ? '<i class="fas fa-chevron-up"></i> Show Fewer Projects'
+            : '<i class="fas fa-chevron-down"></i> More Projects';
+    });
+}
+
+// Animated network/particle canvas for the hero
+function initHeroCanvas() {
+    const canvas = $('#bot-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const COLORS = ['#00fff0', '#ad4fff'];
+    const MAX_DIST = 130;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let particles = [];
+
+    function resize() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        initParticles();
+    }
+
+    function initParticles() {
+        const count = Math.min(90, Math.floor(canvas.width / 16));
+        particles = [];
+        for (let i = 0; i < count; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                r: Math.random() * 2 + 1,
+                c: COLORS[Math.floor(Math.random() * COLORS.length)]
+            });
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const a = particles[i], b = particles[j];
+                const dx = a.x - b.x, dy = a.y - b.y;
+                const dist = Math.hypot(dx, dy);
+                if (dist < MAX_DIST) {
+                    const alpha = (1 - dist / MAX_DIST) * 0.35;
+                    ctx.strokeStyle = `rgba(0,255,240,${alpha})`;
+                    ctx.lineWidth = 0.6;
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(b.x, b.y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        particles.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = p.c;
+            ctx.globalAlpha = 0.8;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        });
+    }
+
+    function update() {
+        particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        });
+    }
+
+    function loop() {
+        update();
+        draw();
+        if (!reduceMotion) requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    loop();
+}
+
 // Project modal functionality
 function initProjectModal() {
     const modal = $('#project-modal');
@@ -295,7 +460,35 @@ function initProjectModal() {
 
     // Project data - you can add more details for each project
     const projectData = {
+        'Virtual Engineer (66degrees)': {
+            image: 'images/virtual_engineer.svg',
+            description: `A multi-agent agentic platform built for a global engineering-services client, automating civil, electrical, and mechanical engineering workflows.`,
+            techStack: ['LangGraph', 'LangChain', 'MCP', 'Multi-Agent Systems', 'Prompt Engineering', 'LLMs', 'FastAPI', 'GCP'],
+            features: [
+                'Orchestrator-planner-specialist multi-agent architecture',
+                'Memory and token management for long, multi-turn agent sessions',
+                'Reusable MCP tool-development patterns',
+                'Custom frontend for engineers to interact with the agent system',
+                'Automation of civil, electrical, and mechanical workflows'
+            ]
+        },
+
+        'Fraud Detection & Risk Intelligence Platform': {
+            image: 'images/fraud_detection.svg',
+            description: `A personal project building an end-to-end fraud-detection and risk-intelligence pipeline — an AI agent that analyzes transaction and account activity for suspicious behavior.`,
+            techStack: ['LLMs', 'Agents', 'SHAP', 'FalkorDB', 'Cypher', 'GCP', 'FastAPI', 'Python'],
+            features: [
+                'AI agent for alert triage and suspicious-activity analysis',
+                'Mule-account pattern detection and scam-conversation analysis',
+                'Risk-scoring pipeline combining rule-based checks, pattern analysis, and ML scoring',
+                'SHAP explainability for model scoring',
+                'Graph-based relationship engine using FalkorDB and Cypher',
+                'End-to-end ownership: architecture, GCP/Railway infrastructure, and evaluation'
+            ]
+        },
+
         'Healthcare Insights Platform': {
+            image: 'images/hcls_insights_platform.png',
             description: `An end-to-end Healthcare analytics platform along with natural language-driven insights to support strategic decision-making.`,
             techStack: ['LLMs', 'GCP', 'Agents', 'Prompt Engineering','Snowflake','Milvus', 'LangChain', 'LangGraph', 'DeepEval'],
             features: [
@@ -310,6 +503,7 @@ function initProjectModal() {
         },
 
         'Recipe Recommender Chatbot': {
+            image: 'images/recipe_recommender_chatbot2.png',
             description: `A personalized recipe recommendation chatbot that suggests dishes based on users' cart items to boost engagement and basket value.`,
             techStack: ['LLMs', 'RAG', 'Prompt Engineering','Generative AI', 'Web Scraping', 'Dialogflow CX'],
             features: [
@@ -320,6 +514,7 @@ function initProjectModal() {
             ]
         },
         "Enhancing Student Engagement through Teacher's Emotion Analysis": {
+            image: 'images/fer_analysis.png',
             description: `A deep learning-based system to enhance student engagement by analyzing teacher emotions and correlating them with student feedback sentiment.`,
             techStack: ['CNN', 'VGG16', 'BERT', 'NLP', 'Sentiment Analysis', 'Deep Learning'],
             features: [
@@ -331,6 +526,7 @@ function initProjectModal() {
             ]
         },
         'GTM Intelligence Assistant': {
+            image: 'images/gtm_accelarator_tool_1.jpeg',
             description: `An internal tool to accelerate client research for GTM teams by generating company profiles, use case recommendations, and persona insights using generative AI and vector-based retrieval.`,
             techStack: ['LLMs', 'RAG', 'ChromaDB', 'Web Scraping', 'Streamlit', 'Linkedin Scraping'],
             features: [
@@ -351,6 +547,13 @@ function initProjectModal() {
         // Update modal content
         $('.modal-header h2').textContent = projectTitle;
         $('.project-description').textContent = project.description;
+
+        // Update modal image
+        const modalImage = $('.modal-image');
+        if (modalImage) {
+            modalImage.src = project.image;
+            modalImage.alt = projectTitle;
+        }
         
         // Update tech stack
         const modalTags = $('.modal-tags');
